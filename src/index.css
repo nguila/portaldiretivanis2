@@ -148,6 +148,13 @@
   .stage-5 { background-color: hsl(var(--stage-5)); }
   .stage-6 { background-color: hsl(var(--stage-6)); }
 
+  .stage-indicator-dot.stage-1 { background-color: hsl(var(--stage-1)); }
+  .stage-indicator-dot.stage-2 { background-color: hsl(var(--stage-2)); }
+  .stage-indicator-dot.stage-3 { background-color: hsl(var(--stage-3)); }
+  .stage-indicator-dot.stage-4 { background-color: hsl(var(--stage-4)); }
+  .stage-indicator-dot.stage-5 { background-color: hsl(var(--stage-5)); }
+  .stage-indicator-dot.stage-6 { background-color: hsl(var(--stage-6)); }
+
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out forwards;
   }
