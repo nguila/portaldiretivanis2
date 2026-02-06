@@ -3,14 +3,31 @@ import ProgressIndicator from "@/components/ProgressIndicator";
 import QuickLinks from "@/components/QuickLinks";
 import StageCard from "@/components/StageCard";
 import { nis2Stages } from "@/data/nis2Stages";
+import { useProgress } from "@/hooks/useProgress";
 
 const Index = () => {
+  const {
+    getStageProgress,
+    getTotalProgress,
+    isProcedureCompleted,
+    isDetailCompleted,
+    toggleProcedure,
+    toggleDetail,
+    resetProgress,
+  } = useProgress();
+
+  const totalProgress = getTotalProgress();
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       
       <main className="max-w-6xl mx-auto px-6 py-8">
-        <ProgressIndicator />
+        <ProgressIndicator 
+          totalProgress={totalProgress}
+          getStageProgress={getStageProgress}
+          onReset={resetProgress}
+        />
         <QuickLinks />
         
         <section>
@@ -24,6 +41,11 @@ const Index = () => {
                 key={stage.id} 
                 stage={stage} 
                 index={index}
+                stageProgress={getStageProgress(stage.id)}
+                isProcedureCompleted={(procIdx) => isProcedureCompleted(stage.id, procIdx)}
+                isDetailCompleted={(procIdx, detailIdx) => isDetailCompleted(stage.id, procIdx, detailIdx)}
+                onToggleProcedure={(procIdx) => toggleProcedure(stage.id, procIdx)}
+                onToggleDetail={(procIdx, detailIdx) => toggleDetail(stage.id, procIdx, detailIdx)}
               />
             ))}
           </div>
