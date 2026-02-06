@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, Clock, Users, CheckCircle2, FileText, ExternalLink } from "lucide-react";
+import { ChevronDown, Clock, Users, CheckCircle2 } from "lucide-react";
 import { Stage } from "@/data/nis2Stages";
 import ProcedureItem from "./ProcedureItem";
 
@@ -96,37 +96,6 @@ const StageCard = ({ stage, index }: StageCardProps) => {
                   />
                 ))}
               </div>
-              
-              {/* Templates */}
-              {stage.templates && stage.templates.length > 0 && (
-                <div className="mt-6 space-y-3">
-                  <h4 className="font-medium text-foreground flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-primary" />
-                    Templates e Recursos
-                  </h4>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {stage.templates.map((template, idx) => (
-                      <a
-                        key={idx}
-                        href={template.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-start gap-3 p-3 rounded-lg bg-primary/5 hover:bg-primary/10 border border-primary/10 transition-colors group"
-                      >
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-foreground text-sm group-hover:text-primary transition-colors">
-                            {template.name}
-                          </p>
-                          <p className="text-xs text-muted-foreground mt-0.5">
-                            {template.description}
-                          </p>
-                        </div>
-                        <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary shrink-0 mt-0.5" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         )}
