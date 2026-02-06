@@ -6,12 +6,6 @@ export interface Procedure {
   details: string[];
 }
 
-export interface Template {
-  name: string;
-  description: string;
-  url: string;
-}
-
 export interface Stage {
   id: number;
   title: string;
@@ -22,7 +16,6 @@ export interface Stage {
   procedures: Procedure[];
   timeline: string;
   responsibles: string[];
-  templates: Template[];
 }
 
 export const nis2Stages: Stage[] = [
@@ -66,18 +59,6 @@ export const nis2Stages: Stage[] = [
           "Preparar registo para notificação às autoridades competentes"
         ]
       }
-    ],
-    templates: [
-      {
-        name: "Checklist de Enquadramento NIS2",
-        description: "Lista de verificação para determinar se a organização está abrangida",
-        url: "https://nis2directive.eu/nis2-checklist/"
-      },
-      {
-        name: "Formulário de Classificação de Entidade",
-        description: "Template para documentar a classificação como Entidade Essencial ou Importante",
-        url: "https://nis2directive.eu/nis2-entity-classification/"
-      }
     ]
   },
   {
@@ -119,18 +100,6 @@ export const nis2Stages: Stage[] = [
           "Definir matriz RACI para processos de segurança",
           "Estabelecer canais de comunicação e escalamento"
         ]
-      }
-    ],
-    templates: [
-      {
-        name: "Matriz RACI de Cibersegurança",
-        description: "Template para definir responsabilidades de segurança",
-        url: "https://nis2directive.eu/nis2-raci-template/"
-      },
-      {
-        name: "Plano de Formação em Segurança",
-        description: "Modelo para programa de sensibilização e formação",
-        url: "https://nis2directive.eu/nis2-training-plan/"
       }
     ]
   },
@@ -183,23 +152,6 @@ export const nis2Stages: Stage[] = [
           "Atualizar análise após incidentes ou mudanças significativas",
           "Reportar evolução do risco aos órgãos de gestão"
         ]
-      }
-    ],
-    templates: [
-      {
-        name: "Template de Inventário de Ativos",
-        description: "Modelo para catalogar ativos críticos da organização",
-        url: "https://nis2directive.eu/nis2-asset-inventory/"
-      },
-      {
-        name: "Matriz de Avaliação de Riscos",
-        description: "Template para análise de probabilidade e impacto",
-        url: "https://nis2directive.eu/nis2-risk-assessment/"
-      },
-      {
-        name: "Registo de Tratamento de Riscos",
-        description: "Modelo para documentar medidas de mitigação",
-        url: "https://nis2directive.eu/nis2-risk-treatment/"
       }
     ]
   },
@@ -254,23 +206,6 @@ export const nis2Stages: Stage[] = [
           "Planos de contingência para falhas de fornecedores"
         ]
       }
-    ],
-    templates: [
-      {
-        name: "Política de Segurança da Informação",
-        description: "Template base para política de segurança",
-        url: "https://nis2directive.eu/nis2-security-policy/"
-      },
-      {
-        name: "Plano de Continuidade de Negócio",
-        description: "Modelo BCP adaptado aos requisitos NIS2",
-        url: "https://nis2directive.eu/nis2-bcp-template/"
-      },
-      {
-        name: "Checklist de Avaliação de Fornecedores",
-        description: "Lista de verificação de segurança para terceiros",
-        url: "https://nis2directive.eu/nis2-supplier-assessment/"
-      }
     ]
   },
   {
@@ -323,23 +258,6 @@ export const nis2Stages: Stage[] = [
           "Partilha de informação com comunidade setorial"
         ]
       }
-    ],
-    templates: [
-      {
-        name: "Plano de Resposta a Incidentes",
-        description: "Template IRP completo com procedimentos de resposta",
-        url: "https://nis2directive.eu/nis2-incident-response-plan/"
-      },
-      {
-        name: "Template de Notificação ao CNCS",
-        description: "Formulário para reporte de incidentes às autoridades",
-        url: "https://nis2directive.eu/nis2-incident-notification/"
-      },
-      {
-        name: "Relatório Post-Mortem",
-        description: "Modelo para análise de lições aprendidas",
-        url: "https://nis2directive.eu/nis2-post-mortem/"
-      }
     ]
   },
   {
@@ -391,23 +309,6 @@ export const nis2Stages: Stage[] = [
           "Realizar exercícios de preparação para auditorias",
           "Conhecer direitos e deveres durante inspeções"
         ]
-      }
-    ],
-    templates: [
-      {
-        name: "Checklist de Conformidade NIS2",
-        description: "Lista completa de requisitos do DL 125/2025",
-        url: "https://nis2directive.eu/nis2-compliance-checklist/"
-      },
-      {
-        name: "Plano de Auditoria Interna",
-        description: "Template para programa anual de auditorias",
-        url: "https://nis2directive.eu/nis2-audit-plan/"
-      },
-      {
-        name: "Registo de Evidências de Conformidade",
-        description: "Modelo para documentar provas de cumprimento",
-        url: "https://nis2directive.eu/nis2-evidence-log/"
       }
     ]
   }
