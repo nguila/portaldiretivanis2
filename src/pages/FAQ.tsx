@@ -59,12 +59,26 @@ const FAQ = () => {
         </div>
 
         <footer className="mt-12 py-8 border-t border-border">
-          <p className="text-center text-muted-foreground text-sm">
+          <p className="text-center text-muted-foreground text-sm mb-4">
             Este documento foi elaborado com base nas disposições da Diretiva (UE) 2022/2555. Para a aplicação específica em Portugal, consulte o{" "}
-            <a href="https://diariodarepublica.pt/dr/detalhe/decreto-lei/125-2025-962603401" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            <a href="https://diariodarepublica.pt/dr/detalhe/decreto-lei/125-2025-236981094" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
               Decreto-Lei n.º 125/2025
             </a>.
           </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm">
+            <a href="https://diariodarepublica.pt/dr/detalhe/decreto-lei/125-2025-236981094" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              📜 DL 125/2025 ↗
+            </a>
+            <a href="https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022L2555" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              🇪🇺 Diretiva NIS2 ↗
+            </a>
+            <a href="https://www.cncs.gov.pt" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              🛡️ CNCS ↗
+            </a>
+            <a href="https://www.enisa.europa.eu" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              🔒 ENISA ↗
+            </a>
+          </div>
         </footer>
       </main>
     </div>
