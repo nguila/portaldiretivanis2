@@ -103,16 +103,16 @@ const Header = () => {
             Novo regime jurídico da cibersegurança — Transposição da Diretiva (UE) 2022/2555
           </p>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+            <a href="https://diariodarepublica.pt/dr/detalhe/decreto-lei/125-2025-236981094" target="_blank" rel="noopener noreferrer" className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10 hover:bg-white/20 transition-colors">
               <span className="text-xs uppercase tracking-wider opacity-70">Diploma</span>
               <p className="font-semibold text-lg">DL 125/2025</p>
-              <span className="text-xs opacity-60">4 de Dezembro</span>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
+              <span className="text-xs opacity-60">4 de Dezembro ↗</span>
+            </a>
+            <a href="https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022L2555" target="_blank" rel="noopener noreferrer" className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10 hover:bg-white/20 transition-colors">
               <span className="text-xs uppercase tracking-wider opacity-70">Diretiva UE</span>
               <p className="font-semibold text-lg">2022/2555</p>
-              <span className="text-xs opacity-60">NIS2</span>
-            </div>
+              <span className="text-xs opacity-60">NIS2 ↗</span>
+            </a>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10">
               <span className="text-xs uppercase tracking-wider opacity-70">Implementação</span>
               <p className="font-semibold text-lg">6 Etapas</p>
