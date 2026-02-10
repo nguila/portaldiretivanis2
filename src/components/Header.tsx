@@ -1,3 +1,5 @@
+import euFlag from "@/assets/eu-flag.png";
+import ptFlag from "@/assets/pt-flag.png";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -23,7 +25,9 @@ const Header = () => {
       {/* Nav bar */}
       <nav className="max-w-6xl mx-auto px-6 pt-4 pb-2 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <span className="font-bold text-sm">Início</span>
+          <img src={euFlag} alt="Bandeira da União Europeia" className="w-8 h-6 object-cover rounded shadow border border-white/20" />
+          <img src={ptFlag} alt="Bandeira de Portugal" className="w-8 h-6 object-cover rounded shadow border border-white/20" />
+          <span className="font-bold text-sm ml-1 hidden sm:inline">NIS2 Portugal</span>
         </Link>
 
         {/* Desktop nav */}
@@ -78,7 +82,12 @@ const Header = () => {
 
       {/* Hero content */}
       <div className="max-w-6xl mx-auto px-6 py-10">
-        <div className="flex flex-col gap-6 mb-8 animate-fade-in">
+        <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8 animate-fade-in">
+          <div className="flex items-center gap-3">
+            <img src={euFlag} alt="Bandeira da União Europeia" className="w-16 h-11 object-cover rounded-md shadow-lg border border-white/20" />
+            <img src={ptFlag} alt="Bandeira de Portugal" className="w-16 h-11 object-cover rounded-md shadow-lg border border-white/20" />
+          </div>
+          <div className="h-12 w-px bg-white/30 hidden md:block" />
           <div className="flex-1">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
               Diretiva da União Europeia sobre Cibersegurança
