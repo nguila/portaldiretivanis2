@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronRight, Check } from "lucide-react";
 import { Procedure } from "@/data/nis2Stages";
 import { Checkbox } from "@/components/ui/checkbox";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ProcedureItemProps {
   procedure: Procedure;
@@ -88,36 +89,48 @@ const ProcedureItem = ({
         </button>
       </div>
       
-      {isOpen && (
-        <div className="px-4 pb-4 animate-scale-in">
-          <div className="ml-8 space-y-2">
-            {procedure.details.map((detail, idx) => {
-              const isCompleted = isDetailCompleted(idx);
-              return (
-                <label 
-                  key={idx}
-                  className={`flex items-start gap-3 text-sm p-2 rounded-lg cursor-pointer transition-all duration-200 hover:bg-secondary/50 ${
-                    isCompleted ? 'bg-green-500/10' : ''
-                  }`}
-                >
-                  <Checkbox 
-                    checked={isCompleted}
-                    onCheckedChange={() => onToggleDetail(idx)}
-                    className="mt-0.5 shrink-0"
-                  />
-                  <span className={`transition-colors ${
-                    isCompleted 
-                      ? 'text-green-600 dark:text-green-400 line-through opacity-70' 
-                      : 'text-muted-foreground'
-                  }`}>
-                    {detail}
-                  </span>
-                </label>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            className="px-4 pb-4"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            style={{ overflow: "hidden" }}
+          >
+            <div className="ml-8 space-y-2">
+              {procedure.details.map((detail, idx) => {
+                const isCompleted = isDetailCompleted(idx);
+                return (
+                  <motion.label 
+                    key={idx}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.04 }}
+                    className={`flex items-start gap-3 text-sm p-2 rounded-lg cursor-pointer transition-all duration-200 hover:bg-secondary/50 ${
+                      isCompleted ? 'bg-green-500/10' : ''
+                    }`}
+                  >
+                    <Checkbox 
+                      checked={isCompleted}
+                      onCheckedChange={() => onToggleDetail(idx)}
+                      className="mt-0.5 shrink-0"
+                    />
+                    <span className={`transition-colors ${
+                      isCompleted 
+                        ? 'text-green-600 dark:text-green-400 line-through opacity-70' 
+                        : 'text-muted-foreground'
+                    }`}>
+                      {detail}
+                    </span>
+                  </motion.label>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

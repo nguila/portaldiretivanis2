@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronDown, Clock, Users, CheckCircle2, Check } from "lucide-react";
 import { Stage } from "@/data/nis2Stages";
 import ProcedureItem from "./ProcedureItem";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface StageCardProps {
   stage: Stage;
@@ -27,16 +28,18 @@ const StageCard = ({
   const isStageComplete = stageProgress.percentage === 100;
 
   return (
-    <div 
-      className="animate-slide-up"
-      style={{ animationDelay: `${index * 0.1}s` }}
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div 
+      <motion.div 
         className={`
           bg-card rounded-2xl shadow-card transition-all duration-300
           ${isExpanded ? 'shadow-hover ring-2 ring-primary/20' : 'hover:shadow-hover'}
           ${isStageComplete ? 'ring-2 ring-green-500/30' : ''}
         `}
+        layout
       >
         {/* Header */}
         <button
@@ -126,39 +129,59 @@ const StageCard = ({
         </button>
         
         {/* Expanded Content */}
-        {isExpanded && (
-          <div className="px-6 pb-6 animate-scale-in">
-            <div className="border-t border-border pt-6">
-              {/* Overview */}
-              <div className="bg-secondary/50 rounded-xl p-4 mb-6">
-                <h4 className="font-medium text-foreground mb-2">Visão Geral</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  {stage.overview}
-                </p>
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div 
+              className="px-6 pb-6"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              style={{ overflow: "hidden" }}
+            >
+              <div className="border-t border-border pt-6">
+                {/* Overview */}
+                <motion.div 
+                  className="bg-secondary/50 rounded-xl p-4 mb-6"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  <h4 className="font-medium text-foreground mb-2">Visão Geral</h4>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {stage.overview}
+                  </p>
+                </motion.div>
+                
+                {/* Procedures */}
+                <div className="space-y-4">
+                  <h4 className="font-medium text-foreground">Procedimentos</h4>
+                  {stage.procedures.map((procedure, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: -15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 + idx * 0.05 }}
+                    >
+                      <ProcedureItem 
+                        procedure={procedure} 
+                        stageColor={stage.colorClass}
+                        stageId={stage.id}
+                        procedureIndex={idx}
+                        isProcedureCompleted={isProcedureCompleted(idx)}
+                        isDetailCompleted={(detailIdx) => isDetailCompleted(idx, detailIdx)}
+                        onToggleProcedure={() => onToggleProcedure(idx)}
+                        onToggleDetail={(detailIdx) => onToggleDetail(idx, detailIdx)}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-              
-              {/* Procedures */}
-              <div className="space-y-4">
-                <h4 className="font-medium text-foreground">Procedimentos</h4>
-                {stage.procedures.map((procedure, idx) => (
-                  <ProcedureItem 
-                    key={idx} 
-                    procedure={procedure} 
-                    stageColor={stage.colorClass}
-                    stageId={stage.id}
-                    procedureIndex={idx}
-                    isProcedureCompleted={isProcedureCompleted(idx)}
-                    isDetailCompleted={(detailIdx) => isDetailCompleted(idx, detailIdx)}
-                    onToggleProcedure={() => onToggleProcedure(idx)}
-                    onToggleDetail={(detailIdx) => onToggleDetail(idx, detailIdx)}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </motion.div>
   );
 };
 
