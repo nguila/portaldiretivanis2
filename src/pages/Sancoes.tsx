@@ -16,10 +16,10 @@ const Sancoes = () => {
         <motion.div {...fadeIn}>
           <h2 className="text-3xl font-bold text-foreground mb-2">Regime Sancionatório e Supervisão</h2>
           <p className="text-muted-foreground mb-4 max-w-3xl leading-relaxed">
-            A Diretiva NIS 2 introduz um regime sancionatório significativamente mais rigoroso, estabelecendo coimas elevadas e responsabilização direta dos órgãos de gestão.
+            A Diretiva NIS 2 (Diretiva (UE) 2022/2555) introduz um regime sancionatório significativamente mais rigoroso do que a sua antecessora, estabelecendo coimas elevadas e responsabilização direta dos órgãos de gestão. As penalizações devem ser "eficazes, proporcionadas e dissuasivas".
           </p>
           <p className="text-sm text-muted-foreground mb-8 max-w-3xl italic">
-            As penalizações devem ser "eficazes, proporcionadas e dissuasivas".
+            As diferenças nos valores máximos das coimas são definidas no Artigo 34.º da Diretiva.
           </p>
         </motion.div>
 
@@ -48,7 +48,7 @@ const Sancoes = () => {
         <motion.div {...fadeIn} transition={{ delay: 0.2 }}>
           <h3 className="text-xl font-semibold text-foreground mb-2">1. Multas Administrativas (Coimas)</h3>
           <p className="text-sm text-muted-foreground mb-4">
-            A diretiva define limites mínimos para os valores máximos das coimas — os Estados-Membros não podem estabelecer tetos inferiores a estes valores na sua lei nacional:
+            Embora ambas as categorias estejam sujeitas a sanções, a Diretiva NIS 2 estabelece tetos distintos no Artigo 34.º. A diretiva define limites mínimos para os valores máximos das coimas — os Estados-Membros não podem estabelecer tetos inferiores a estes valores na sua lei nacional:
           </p>
         </motion.div>
 
@@ -59,7 +59,7 @@ const Sancoes = () => {
               <h4 className="font-semibold text-foreground">Entidades Essenciais</h4>
             </div>
             <p className="text-2xl font-bold text-primary mb-1">€10.000.000</p>
-            <p className="text-sm text-muted-foreground">ou <strong>2%</strong> do volume de negócios anual mundial total do exercício financeiro anterior (o que for mais elevado).</p>
+            <p className="text-sm text-muted-foreground">ou <strong>2%</strong> do volume de negócios anual mundial total do exercício financeiro anterior da empresa, consoante o montante que for mais elevado.</p>
           </div>
           <div className="bg-card rounded-2xl shadow-card p-6 border-l-4 border-accent">
             <div className="flex items-center gap-2 mb-2">
@@ -67,7 +67,7 @@ const Sancoes = () => {
               <h4 className="font-semibold text-foreground">Entidades Importantes</h4>
             </div>
             <p className="text-2xl font-bold text-accent mb-1">€7.000.000</p>
-            <p className="text-sm text-muted-foreground">ou <strong>1,4%</strong> do volume de negócios anual mundial total do exercício financeiro anterior (o que for mais elevado).</p>
+            <p className="text-sm text-muted-foreground">ou <strong>1,4%</strong> do volume de negócios anual mundial total do exercício financeiro anterior da empresa, consoante o montante que for mais elevado.</p>
           </div>
         </motion.div>
 
@@ -155,7 +155,7 @@ const Sancoes = () => {
         {/* 4. Critérios */}
         <motion.div {...fadeIn} transition={{ delay: 0.4 }} className="bg-card rounded-2xl shadow-card p-6 mb-8">
           <h3 className="text-lg font-semibold text-foreground mb-2">4. Critérios para Aplicação das Penalizações</h3>
-          <p className="text-sm text-muted-foreground mb-4">Ao decidir sobre a aplicação de multas ou outras medidas, as autoridades devem ter em conta:</p>
+          <p className="text-sm text-muted-foreground mb-4">Ao decidir sobre a aplicação de multas ou outras medidas, as autoridades devem ter em conta as circunstâncias de cada caso individual:</p>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               "A gravidade e duração da infração.",
@@ -170,6 +170,25 @@ const Sancoes = () => {
                 <p className="text-sm text-muted-foreground">{item}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-6 space-y-3">
+            <h4 className="text-sm font-semibold text-foreground">Pontos em Comum</h4>
+            <p className="text-sm text-muted-foreground">Apesar da diferença nos valores, a aplicação das multas segue princípios semelhantes para ambos os tipos de entidades:</p>
+            <div className="space-y-2">
+              <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5">
+                <span className="text-primary font-bold text-sm shrink-0">1.</span>
+                <p className="text-sm text-muted-foreground"><strong>Critério do "Mais Elevado":</strong> Em ambos os casos, a autoridade competente deve aplicar o limite que for maior (o valor fixo ou a percentagem do volume de negócios).</p>
+              </div>
+              <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5">
+                <span className="text-primary font-bold text-sm shrink-0">2.</span>
+                <p className="text-sm text-muted-foreground"><strong>Motivos da Multa:</strong> Estas multas aplicam-se em caso de infração das obrigações de gestão de riscos de cibersegurança (Artigo 21.º) ou das obrigações de notificação (Artigo 23.º).</p>
+              </div>
+              <div className="flex items-start gap-2 p-3 rounded-xl bg-primary/5">
+                <span className="text-primary font-bold text-sm shrink-0">3.</span>
+                <p className="text-sm text-muted-foreground"><strong>Avaliação Individual:</strong> A decisão de aplicar uma multa e o seu montante deve ter em conta as circunstâncias de cada caso, como a gravidade da infração, a duração, danos causados, intencionalidade (dolo) ou negligência.</p>
+              </div>
+            </div>
           </div>
         </motion.div>
 
