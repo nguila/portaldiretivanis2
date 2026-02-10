@@ -2,6 +2,7 @@ import { nis2Stages } from "@/data/nis2Stages";
 import { Check, RotateCcw } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ProgressIndicatorProps {
   totalProgress: { completed: number; total: number; percentage: number };
@@ -11,39 +12,66 @@ interface ProgressIndicatorProps {
 
 const ProgressIndicator = ({ totalProgress, getStageProgress, onReset }: ProgressIndicatorProps) => {
   return (
-    <div className="bg-card rounded-2xl shadow-card p-6 mb-8">
+    <motion.div 
+      className="bg-card rounded-2xl shadow-card p-6 mb-8"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-lg font-semibold text-foreground">
             Progresso de Implementação
           </h3>
           <p className="text-sm text-muted-foreground">
-            {totalProgress.completed} de {totalProgress.total} tarefas concluídas
+            <motion.span
+              key={totalProgress.completed}
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {totalProgress.completed} de {totalProgress.total} tarefas concluídas
+            </motion.span>
           </p>
         </div>
         
         <div className="flex items-center gap-4">
           <div className="text-right">
-            <span className={`text-2xl font-bold ${
-              totalProgress.percentage === 100 
-                ? 'text-accent' 
-                : 'text-primary'
-            }`}>
+            <motion.span 
+              key={totalProgress.percentage}
+              className={`text-2xl font-bold inline-block ${
+                totalProgress.percentage === 100 
+                  ? 'text-accent' 
+                  : 'text-primary'
+              }`}
+              initial={{ scale: 1.3, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
               {totalProgress.percentage}%
-            </span>
+            </motion.span>
           </div>
           
-          {totalProgress.completed > 0 && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onReset}
-              className="text-muted-foreground hover:text-destructive"
-            >
-              <RotateCcw className="w-4 h-4 mr-1" />
-              Reiniciar
-            </Button>
-          )}
+          <AnimatePresence>
+            {totalProgress.completed > 0 && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onReset}
+                  className="text-muted-foreground hover:text-destructive"
+                >
+                  <RotateCcw className="w-4 h-4 mr-1" />
+                  Reiniciar
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
       
@@ -60,9 +88,9 @@ const ProgressIndicator = ({ totalProgress, getStageProgress, onReset }: Progres
           return (
             <div key={stage.id} className="flex items-center flex-1">
               <div className="flex flex-col items-center flex-1">
-                <div 
+                <motion.div 
                   className={`
-                    stage-indicator text-sm transition-all duration-300
+                    stage-indicator text-sm
                     ${isComplete 
                       ? 'bg-accent text-accent-foreground' 
                       : hasProgress 
@@ -70,9 +98,22 @@ const ProgressIndicator = ({ totalProgress, getStageProgress, onReset }: Progres
                         : stage.colorClass
                     }
                   `}
+                  animate={isComplete ? { scale: [1, 1.2, 1] } : {}}
+                  transition={{ duration: 0.4 }}
+                  layout
                 >
-                  {isComplete ? <Check className="w-4 h-4" /> : stage.id}
-                </div>
+                  <AnimatePresence mode="wait">
+                    {isComplete ? (
+                      <motion.div key="check" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+                        <Check className="w-4 h-4" />
+                      </motion.div>
+                    ) : (
+                      <motion.span key="num" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        {stage.id}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
                 <div className="mt-2 text-center hidden md:block">
                   <span className={`text-xs ${
                     isComplete ? 'text-accent font-medium' : 'text-muted-foreground'
@@ -80,9 +121,13 @@ const ProgressIndicator = ({ totalProgress, getStageProgress, onReset }: Progres
                     {stage.title.split(" ")[0]}
                   </span>
                   {hasProgress && !isComplete && (
-                    <div className="text-xs text-muted-foreground">
+                    <motion.div 
+                      className="text-xs text-muted-foreground"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                    >
                       {stageProgress.percentage}%
-                    </div>
+                    </motion.div>
                   )}
                 </div>
               </div>
@@ -96,7 +141,7 @@ const ProgressIndicator = ({ totalProgress, getStageProgress, onReset }: Progres
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
