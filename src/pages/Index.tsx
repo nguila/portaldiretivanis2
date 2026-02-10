@@ -86,6 +86,9 @@ const Index = () => {
             <a href="https://www.enisa.europa.eu" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
               🔒 ENISA ↗
             </a>
+            <a href="https://www.cncs.gov.pt/pt/perguntas-frequentes/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              ❓ FAQ CNCS ↗
+            </a>
           </div>
         </footer>
       </main>
