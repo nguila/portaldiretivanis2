@@ -38,8 +38,10 @@ const Obrigacoes = () => {
     getTotalProgress,
     isProcedureCompleted,
     isDetailCompleted,
+    getProcedureNotes,
     toggleProcedure,
     toggleDetail,
+    updateNotes,
     resetProgress,
   } = useProgress();
 
@@ -106,8 +108,10 @@ const Obrigacoes = () => {
                 stageProgress={getStageProgress(stage.id)}
                 isProcedureCompleted={(procIdx) => isProcedureCompleted(stage.id, procIdx)}
                 isDetailCompleted={(procIdx, detailIdx) => isDetailCompleted(stage.id, procIdx, detailIdx)}
+                getProcedureNotes={(procIdx) => getProcedureNotes(stage.id, procIdx)}
                 onToggleProcedure={(procIdx) => toggleProcedure(stage.id, procIdx)}
                 onToggleDetail={(procIdx, detailIdx) => toggleDetail(stage.id, procIdx, detailIdx)}
+                onUpdateNotes={(procIdx, notes) => updateNotes(stage.id, procIdx, notes)}
               />
             ))}
           </div>

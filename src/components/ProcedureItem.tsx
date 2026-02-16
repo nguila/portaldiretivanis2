@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronRight, Check } from "lucide-react";
+import { ChevronRight, Check, MessageSquare } from "lucide-react";
 import { Procedure } from "@/data/nis2Stages";
 import { Checkbox } from "@/components/ui/checkbox";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,8 +11,10 @@ interface ProcedureItemProps {
   procedureIndex: number;
   isProcedureCompleted: boolean;
   isDetailCompleted: (detailIndex: number) => boolean;
+  notes: string;
   onToggleProcedure: () => void;
   onToggleDetail: (detailIndex: number) => void;
+  onUpdateNotes: (notes: string) => void;
 }
 
 const ProcedureItem = ({ 
@@ -20,8 +22,10 @@ const ProcedureItem = ({
   stageColor,
   isProcedureCompleted,
   isDetailCompleted,
+  notes,
   onToggleProcedure,
-  onToggleDetail
+  onToggleDetail,
+  onUpdateNotes
 }: ProcedureItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -127,6 +131,29 @@ const ProcedureItem = ({
                   </motion.label>
                 );
               })}
+
+              {/* Notes textarea */}
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: procedure.details.length * 0.04 + 0.1 }}
+                className="mt-4 pt-3 border-t border-border"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <MessageSquare className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Notas / Observações</span>
+                </div>
+                <textarea
+                  value={notes}
+                  onChange={(e) => onUpdateNotes(e.target.value)}
+                  placeholder="Registe aqui observações, decisões ou evidências relevantes…"
+                  className="w-full min-h-[80px] p-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground/50 resize-y focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+                  maxLength={2000}
+                />
+                {notes.length > 0 && (
+                  <p className="text-xs text-muted-foreground mt-1 text-right">{notes.length}/2000</p>
+                )}
+              </motion.div>
             </div>
           </motion.div>
         )}

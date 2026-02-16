@@ -1,12 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
 import { nis2Stages } from "@/data/nis2Stages";
 
+interface ProcedureProgress {
+  completed: boolean;
+  details: { [detailIndex: number]: boolean };
+  notes: string;
+}
+
 interface ProgressState {
   [stageId: number]: {
-    [procedureIndex: number]: {
-      completed: boolean;
-      details: { [detailIndex: number]: boolean };
-    };
+    [procedureIndex: number]: ProcedureProgress;
   };
 }
 
@@ -20,6 +23,7 @@ const initializeProgressState = (): ProgressState => {
       state[stage.id][procIndex] = {
         completed: false,
         details: {},
+        notes: "",
       };
       procedure.details.forEach((_, detailIndex) => {
         state[stage.id][procIndex].details[detailIndex] = false;
@@ -92,6 +96,18 @@ export const useProgress = () => {
     });
   }, []);
 
+  const updateNotes = useCallback((stageId: number, procedureIndex: number, notes: string) => {
+    setProgress((prev) => {
+      const newState = { ...prev };
+      const stage = { ...newState[stageId] };
+      const procedure = { ...stage[procedureIndex] };
+      procedure.notes = notes;
+      stage[procedureIndex] = procedure;
+      newState[stageId] = stage;
+      return newState;
+    });
+  }, []);
+
   const getStageProgress = useCallback((stageId: number) => {
     const stageProgress = progress[stageId];
     if (!stageProgress) return { completed: 0, total: 0, percentage: 0 };
@@ -119,7 +135,7 @@ export const useProgress = () => {
     
     Object.values(progress).forEach((stage) => {
       Object.values(stage).forEach((procedure) => {
-        const proc = procedure as { completed: boolean; details: { [key: number]: boolean } };
+        const proc = procedure as ProcedureProgress;
         Object.values(proc.details).forEach((isCompleted) => {
           total++;
           if (isCompleted) completed++;
@@ -142,6 +158,10 @@ export const useProgress = () => {
     return progress[stageId]?.[procedureIndex]?.completed ?? false;
   }, [progress]);
 
+  const getProcedureNotes = useCallback((stageId: number, procedureIndex: number) => {
+    return progress[stageId]?.[procedureIndex]?.notes ?? "";
+  }, [progress]);
+
   const resetProgress = useCallback(() => {
     setProgress(initializeProgressState());
   }, []);
@@ -150,10 +170,12 @@ export const useProgress = () => {
     progress,
     toggleDetail,
     toggleProcedure,
+    updateNotes,
     getStageProgress,
     getTotalProgress,
     isDetailCompleted,
     isProcedureCompleted,
+    getProcedureNotes,
     resetProgress,
   };
 };
