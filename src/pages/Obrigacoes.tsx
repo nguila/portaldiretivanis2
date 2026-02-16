@@ -3,8 +3,10 @@ import ProgressIndicator from "@/components/ProgressIndicator";
 import StageCard from "@/components/StageCard";
 import { nis2Stages } from "@/data/nis2Stages";
 import { useProgress } from "@/hooks/useProgress";
+import { exportToCSV, exportToPDF } from "@/utils/exportProgress";
 import { motion } from "framer-motion";
-import { ShieldAlert, GraduationCap, Eye, UserCheck, ListChecks } from "lucide-react";
+import { ShieldAlert, GraduationCap, Eye, UserCheck, ListChecks, Download, FileText } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -99,6 +101,14 @@ const Obrigacoes = () => {
             getStageProgress={getStageProgress}
             onReset={resetProgress}
           />
+          <div className="flex gap-3 mb-6">
+            <Button variant="outline" size="sm" onClick={exportToCSV} className="gap-2">
+              <Download className="w-4 h-4" /> Exportar CSV
+            </Button>
+            <Button variant="outline" size="sm" onClick={exportToPDF} className="gap-2">
+              <FileText className="w-4 h-4" /> Exportar PDF
+            </Button>
+          </div>
           <div className="space-y-4">
             {nis2Stages.map((stage, index) => (
               <StageCard
