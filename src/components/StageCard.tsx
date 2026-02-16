@@ -10,8 +10,10 @@ interface StageCardProps {
   stageProgress: { completed: number; total: number; percentage: number };
   isProcedureCompleted: (procedureIndex: number) => boolean;
   isDetailCompleted: (procedureIndex: number, detailIndex: number) => boolean;
+  getProcedureNotes: (procedureIndex: number) => string;
   onToggleProcedure: (procedureIndex: number) => void;
   onToggleDetail: (procedureIndex: number, detailIndex: number) => void;
+  onUpdateNotes: (procedureIndex: number, notes: string) => void;
 }
 
 const StageCard = ({ 
@@ -20,8 +22,10 @@ const StageCard = ({
   stageProgress,
   isProcedureCompleted,
   isDetailCompleted,
+  getProcedureNotes,
   onToggleProcedure,
-  onToggleDetail
+  onToggleDetail,
+  onUpdateNotes
 }: StageCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const Icon = stage.icon;
@@ -170,8 +174,10 @@ const StageCard = ({
                         procedureIndex={idx}
                         isProcedureCompleted={isProcedureCompleted(idx)}
                         isDetailCompleted={(detailIdx) => isDetailCompleted(idx, detailIdx)}
+                        notes={getProcedureNotes(idx)}
                         onToggleProcedure={() => onToggleProcedure(idx)}
                         onToggleDetail={(detailIdx) => onToggleDetail(idx, detailIdx)}
+                        onUpdateNotes={(notes) => onUpdateNotes(idx, notes)}
                       />
                     </motion.div>
                   ))}
