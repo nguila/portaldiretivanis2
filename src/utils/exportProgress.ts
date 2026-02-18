@@ -4,6 +4,7 @@ interface ProcedureProgress {
   completed: boolean;
   details: { [detailIndex: number]: boolean };
   notes: string;
+  lastModified?: string;
 }
 
 interface ProgressState {
@@ -26,13 +27,16 @@ export const exportToCSV = () => {
   if (!progress) return;
 
   const rows: string[][] = [
-    ["Etapa", "Procedimento", "Detalhe", "Concluído", "Notas"],
+    ["Etapa", "Procedimento", "Detalhe", "Concluído", "Notas", "Última Alteração"],
   ];
 
   nis2Stages.forEach((stage) => {
     stage.procedures.forEach((proc, procIdx) => {
       const procProgress = progress[stage.id]?.[procIdx];
       const notes = procProgress?.notes || "";
+      const lastMod = procProgress?.lastModified
+        ? new Date(procProgress.lastModified).toLocaleString("pt-PT")
+        : "";
 
       proc.details.forEach((detail, detailIdx) => {
         const completed = procProgress?.details[detailIdx] ? "Sim" : "Não";
@@ -42,6 +46,7 @@ export const exportToCSV = () => {
           detail,
           completed,
           detailIdx === 0 ? notes.replace(/\n/g, " ") : "",
+          detailIdx === 0 ? lastMod : "",
         ]);
       });
     });
@@ -77,6 +82,9 @@ export const exportToPDF = () => {
 
       lines.push(`  ${allDone} ${proc.title}`);
       lines.push(`    ${proc.description}`);
+      if (procProgress?.lastModified) {
+        lines.push(`    🕐 Última alteração: ${new Date(procProgress.lastModified).toLocaleString("pt-PT")}`);
+      }
 
       proc.details.forEach((detail, detailIdx) => {
         const done = procProgress?.details[detailIdx] ? "☑" : "☐";

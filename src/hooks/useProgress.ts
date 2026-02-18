@@ -5,6 +5,7 @@ interface ProcedureProgress {
   completed: boolean;
   details: { [detailIndex: number]: boolean };
   notes: string;
+  lastModified?: string;
 }
 
 interface ProgressState {
@@ -66,6 +67,7 @@ export const useProgress = () => {
       
       procedure.details = details;
       procedure.completed = allDetailsCompleted;
+      procedure.lastModified = new Date().toISOString();
       stage[procedureIndex] = procedure;
       newState[stageId] = stage;
       
@@ -88,6 +90,7 @@ export const useProgress = () => {
         details[Number(key)] = newCompletedState;
       });
       procedure.details = details;
+      procedure.lastModified = new Date().toISOString();
       
       stage[procedureIndex] = procedure;
       newState[stageId] = stage;
@@ -102,6 +105,7 @@ export const useProgress = () => {
       const stage = { ...newState[stageId] };
       const procedure = { ...stage[procedureIndex] };
       procedure.notes = notes;
+      procedure.lastModified = new Date().toISOString();
       stage[procedureIndex] = procedure;
       newState[stageId] = stage;
       return newState;
