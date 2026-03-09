@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import { motion } from "framer-motion";
-import { HelpCircle, Scale, MapPin, Database } from "lucide-react";
+import { HelpCircle, Scale, MapPin, Database, ExternalLink } from "lucide-react";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -13,16 +13,28 @@ const faqs = [
     icon: Scale,
     titulo: "Relação com o DORA",
     resposta: "As entidades financeiras seguem o Regulamento DORA (UE) 2022/2554, que é lex specialis, sobrepondo-se à NIS 2 nas obrigações de gestão de risco e notificação.",
+    referencias: [
+      { label: "Regulamento DORA (UE) 2022/2554", url: "https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022R2554" },
+      { label: "Art. 4.º da Diretiva NIS 2", url: "https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022L2555#d1e1374-80-1" },
+    ],
   },
   {
     icon: MapPin,
     titulo: "Jurisdição",
     resposta: "Regra geral, a jurisdição é o Estado-Membro de estabelecimento. Exceção para fornecedores de comunicações eletrónicas (onde prestam o serviço) e \"Big Tech\" (DNS, Cloud, Data Centers, Redes Sociais), que respondem perante o Estado do estabelecimento principal na UE.",
+    referencias: [
+      { label: "Art. 26.º — Jurisdição (NIS 2)", url: "https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022L2555#d1e4084-80-1" },
+      { label: "DL 125/2025 — Âmbito territorial", url: "https://diariodarepublica.pt/dr/detalhe/decreto-lei/125-2025-236981094" },
+    ],
   },
   {
     icon: Database,
     titulo: "Base de Dados de Vulnerabilidades",
     resposta: "A ENISA manterá uma base de dados europeia de vulnerabilidades para divulgação coordenada.",
+    referencias: [
+      { label: "Art. 12.º — Divulgação coordenada", url: "https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022L2555#d1e2430-80-1" },
+      { label: "ENISA — Vulnerability Disclosure", url: "https://www.enisa.europa.eu/topics/vulnerability-disclosure" },
+    ],
   },
 ];
 
@@ -49,9 +61,25 @@ const FAQ = () => {
                 <div className="p-2 rounded-lg bg-primary/10 shrink-0">
                   <f.icon className="w-5 h-5 text-primary" />
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="font-semibold text-foreground mb-2">{f.titulo}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{f.resposta}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{f.resposta}</p>
+                  {f.referencias && f.referencias.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {f.referencias.map((ref, j) => (
+                        <a
+                          key={j}
+                          href={ref.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 transition-colors"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          {ref.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
