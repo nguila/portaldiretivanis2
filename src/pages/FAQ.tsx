@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import { motion } from "framer-motion";
-import { HelpCircle, Scale, MapPin, Database } from "lucide-react";
+import { HelpCircle, Scale, MapPin, Database, ExternalLink } from "lucide-react";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -61,9 +61,25 @@ const FAQ = () => {
                 <div className="p-2 rounded-lg bg-primary/10 shrink-0">
                   <f.icon className="w-5 h-5 text-primary" />
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="font-semibold text-foreground mb-2">{f.titulo}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{f.resposta}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{f.resposta}</p>
+                  {f.referencias && f.referencias.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {f.referencias.map((ref, j) => (
+                        <a
+                          key={j}
+                          href={ref.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 transition-colors"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          {ref.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
