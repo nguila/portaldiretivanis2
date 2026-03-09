@@ -13,16 +13,28 @@ const faqs = [
     icon: Scale,
     titulo: "Relação com o DORA",
     resposta: "As entidades financeiras seguem o Regulamento DORA (UE) 2022/2554, que é lex specialis, sobrepondo-se à NIS 2 nas obrigações de gestão de risco e notificação.",
+    referencias: [
+      { label: "Regulamento DORA (UE) 2022/2554", url: "https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022R2554" },
+      { label: "Art. 4.º da Diretiva NIS 2", url: "https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022L2555#d1e1374-80-1" },
+    ],
   },
   {
     icon: MapPin,
     titulo: "Jurisdição",
     resposta: "Regra geral, a jurisdição é o Estado-Membro de estabelecimento. Exceção para fornecedores de comunicações eletrónicas (onde prestam o serviço) e \"Big Tech\" (DNS, Cloud, Data Centers, Redes Sociais), que respondem perante o Estado do estabelecimento principal na UE.",
+    referencias: [
+      { label: "Art. 26.º — Jurisdição (NIS 2)", url: "https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022L2555#d1e4084-80-1" },
+      { label: "DL 125/2025 — Âmbito territorial", url: "https://diariodarepublica.pt/dr/detalhe/decreto-lei/125-2025-236981094" },
+    ],
   },
   {
     icon: Database,
     titulo: "Base de Dados de Vulnerabilidades",
     resposta: "A ENISA manterá uma base de dados europeia de vulnerabilidades para divulgação coordenada.",
+    referencias: [
+      { label: "Art. 12.º — Divulgação coordenada", url: "https://eur-lex.europa.eu/legal-content/PT/TXT/?uri=CELEX%3A32022L2555#d1e2430-80-1" },
+      { label: "ENISA — Vulnerability Disclosure", url: "https://www.enisa.europa.eu/topics/vulnerability-disclosure" },
+    ],
   },
 ];
 
